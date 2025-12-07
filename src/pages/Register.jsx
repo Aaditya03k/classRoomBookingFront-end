@@ -13,8 +13,20 @@ export default function Register() {
     e.preventDefault();
     if (!username || !email || !password || !role) { alert("Fill all fields"); return; }
     try {
-      await api.post("/auth/register", { username, email, password, role });
-      alert("Registered! Login now.");
+      fetch("https://your-backend.onrender.com//api/register", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    username,
+    email,
+    password,
+    role
+    
+  })
+});
+
       navigate("/login");
     } catch (err) {
       alert(err.response?.data?.message || "Register failed");
